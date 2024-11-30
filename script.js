@@ -38,6 +38,23 @@ function playRound (humanChoice, computerChoice) {
     
     // Draw
     if (humanChoice === computerChoice) {
-        console.log(`Draw, you both had ${humanChoice}!`)
+        console.log(`Draw! You both had ${humanChoice}.`);
     }
+    // Computer wins
+    else if ((humanChoice === "rock" && computerChoice === "paper") || 
+        (humanChoice === "paper" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "rock")) {
+         
+        // Change score
+        computerScore += 1;
+        console.log(`You lost! Because ${computerChoice} beats ${humanChoice}.`);
+    }
+    // Human wins 
+    else {
+        // Change score
+        humanScore += 1;
+        console.log(`You won! Because ${humanChoice} beats ${computerChoice}.`);
+    }
+
+
 }
