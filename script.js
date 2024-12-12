@@ -1,4 +1,21 @@
-playGame();
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+rock.addEventListener("click", () => {
+    playRound("rock", getComputerChoice());
+});
+paper.addEventListener("click", () => {
+    playRound("paper", getComputerChoice());
+});
+scissors.addEventListener("click", () => {
+    playRound("scissors", getComputerChoice());
+});
+
+
+// Variables to count the score
+let humanScore = 0;
+let computerScore = 0;
 
 // Computer randomly chooses and returns rock, paper or scissors
 function getComputerChoice () {
@@ -31,18 +48,33 @@ function getHumanChoice () {
     }
 }
 
+// Decides who wins
+function playRound (humanChoice, computerChoice) {
+        
+    // Draw
+    if (humanChoice === computerChoice) {
+        console.log(`Draw! You both had ${humanChoice}.`);
+    }
+    // Computer wins
+    else if ((humanChoice === "rock" && computerChoice === "paper") || 
+        (humanChoice === "paper" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "rock")) {
+        
+        // Change score
+        computerScore += 1;
+        console.log(`You lost! Because ${computerChoice} beats ${humanChoice}.`);
+    }
+    // Human wins 
+    else {
+        // Change score
+        humanScore += 1;
+        console.log(`You won! Because ${humanChoice} beats ${computerChoice}.`);
+    }
+}
+
 
 // Plays the entire game
 function playGame () {
-
-    // Variables to count the score
-    let humanScore = 0;
-    let computerScore = 0;
-
-    // Play 5 rounds
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
-    }
 
     console.log(`${humanScore} : ${computerScore}`)
     // Decides the overall winner and quit
@@ -58,27 +90,5 @@ function playGame () {
     }
 
 
-    // Decides who wins
-    function playRound (humanChoice, computerChoice) {
-        
-        // Draw
-        if (humanChoice === computerChoice) {
-            console.log(`Draw! You both had ${humanChoice}.`);
-        }
-        // Computer wins
-        else if ((humanChoice === "rock" && computerChoice === "paper") || 
-            (humanChoice === "paper" && computerChoice === "scissors") ||
-            (humanChoice === "scissors" && computerChoice === "rock")) {
-            
-            // Change score
-            computerScore += 1;
-            console.log(`You lost! Because ${computerChoice} beats ${humanChoice}.`);
-        }
-        // Human wins 
-        else {
-            // Change score
-            humanScore += 1;
-            console.log(`You won! Because ${humanChoice} beats ${computerChoice}.`);
-        }
-    }
+    
 }
