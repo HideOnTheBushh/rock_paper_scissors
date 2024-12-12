@@ -73,28 +73,31 @@ function playRound (humanChoice, computerChoice) {
         humanScore += 1;
         p.textContent = `You won! Because ${humanChoice} beats ${computerChoice}.`;
     }
+    // Show the current score
     p.innerHTML += `<br> ${humanScore} : ${computerScore}`;
     results.appendChild(p);
-    prompResult();
+    if (humanScore === 5 || computerScore === 5) {
+        promptResult();
+    }
 }
 
 
 // Prompts result
-function prompResult () {
+function promptResult () {
 
-    console.log(`${humanScore} : ${computerScore}`)
+    const h1 = document.createElement("h1");
+
     // Decides the overall winner and quit
     if (humanScore > computerScore) {
-        console.log("You've won!");
-        return
+        h1.textContent = "You've won!";
     } else if (humanScore < computerScore) {
-        console.log("You've lost!");
-        return
-    } else {
-        console.log("It was a draw!");
-        return
+        h1.textContent = "You've lost!";
     }
 
-
+    results.appendChild(h1);
     
+    // Reset the game
+    humanScore = 0;
+    computerScore = 0;
+    return;
 }
