@@ -1,6 +1,7 @@
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const results = document.querySelector(".results");
 
 rock.addEventListener("click", () => {
     playRound("rock", getComputerChoice());
@@ -50,10 +51,12 @@ function getHumanChoice () {
 
 // Decides who wins
 function playRound (humanChoice, computerChoice) {
+
+    const p = document.createElement("p");
         
     // Draw
     if (humanChoice === computerChoice) {
-        console.log(`Draw! You both had ${humanChoice}.`);
+        p.textContent = `Draw! You both had ${humanChoice}.`;
     }
     // Computer wins
     else if ((humanChoice === "rock" && computerChoice === "paper") || 
@@ -62,19 +65,22 @@ function playRound (humanChoice, computerChoice) {
         
         // Change score
         computerScore += 1;
-        console.log(`You lost! Because ${computerChoice} beats ${humanChoice}.`);
+        p.textContent = `You lost! Because ${computerChoice} beats ${humanChoice}.`;
     }
     // Human wins 
     else {
         // Change score
         humanScore += 1;
-        console.log(`You won! Because ${humanChoice} beats ${computerChoice}.`);
+        p.textContent = `You won! Because ${humanChoice} beats ${computerChoice}.`;
     }
+    p.innerHTML += `<br> ${humanScore} : ${computerScore}`;
+    results.appendChild(p);
+    prompResult();
 }
 
 
-// Plays the entire game
-function playGame () {
+// Prompts result
+function prompResult () {
 
     console.log(`${humanScore} : ${computerScore}`)
     // Decides the overall winner and quit
